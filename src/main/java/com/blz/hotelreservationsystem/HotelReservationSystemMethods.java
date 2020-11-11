@@ -15,9 +15,9 @@ public class HotelReservationSystemMethods {
 	public static ArrayList<String> strDays = new ArrayList<String>(
 			Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"));
 
-	public static void addHotel(String hotelName, int weekDayRates, int weekEndDayRates) {
+	public static void addHotel(String hotelName, int weekDayRates, int weekEndDayRates,int ratings) {
 		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem(hotelName, weekDayRates,
-				weekEndDayRates);
+				weekEndDayRates,ratings);
 		hotelDetailsList.add(hotelReservationSystem);
 	}
 
@@ -43,9 +43,9 @@ public class HotelReservationSystemMethods {
 		DayOfWeek dayOfWeek_1 = getDays(dateInput_1);
 		DayOfWeek dayOfWeek_2 = getDays(dateInput_2);
 
-		hotelDetailsList.add(new HotelReservationSystem("LakeWood", 110, 90));
-		hotelDetailsList.add(new HotelReservationSystem("BridgeWood", 150, 50));
-		hotelDetailsList.add(new HotelReservationSystem("RidgeWood", 220, 150));
+		hotelDetailsList.add(new HotelReservationSystem("LakeWood", 110, 90,3));
+		hotelDetailsList.add(new HotelReservationSystem("BridgeWood", 150, 50,4));
+		hotelDetailsList.add(new HotelReservationSystem("RidgeWood", 220, 150,5));
 		int rent = 0;
 		for (int i = 0; i < hotelDetailsList.size(); i++) {
 			if (strDays.contains(dayOfWeek_1) || strDays.contains(dayOfWeek_2)) {

@@ -13,5 +13,11 @@ public class HotelReservationSystemTest {
 		HotelReservationSystemMethods.addHotel("Ridgewood", 220, 150);
 		assertEquals(3, HotelReservationSystemMethods.countHotels());
 	}
+	@Test
+	public void given2Dates_GetCheapestHotelByWeekAndWeekendDays() {
+		String result = HotelReservationSystemMethods.getCheapestHotel("11Sep2020", "12Sep2020");
+		System.out.print(result);
+		assertEquals("LakeWood" + " Total Rate $: "+ "200", result);
+	}
 
 }

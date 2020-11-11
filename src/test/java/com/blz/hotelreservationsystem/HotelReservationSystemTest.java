@@ -14,11 +14,6 @@ public class HotelReservationSystemTest {
 		HotelReservationSystemMethods.addHotel("RidgeWood", 220, 150,5,100,40);
 		assertEquals(3, HotelReservationSystemMethods.countHotels());
 	}
-	@Test
-	public void givenHotels_GetCheapestBestRatedHotelForRewardCustomers() {
-		String result =HotelReservationSystemMethods.getCheapestBestRatedForRegularCustomer( "11Sep2020","12Sep2020");
-		assertEquals("RidgeWood, Ratings: 5 and Total Rate: $ 140",result);
-	}
 	
 	
 }

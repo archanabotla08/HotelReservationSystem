@@ -8,6 +8,9 @@ public class HotelReservationSystem {
 	private int rewardWeekDays;
 	private int rewardWeekendDays;
 	
+	public HotelReservationSystem() {
+		
+	}
 	public HotelReservationSystem(String hotelName, int weekDayRates ,int weekEndDayRates,int ratings,int rewardWeekDays,int rewardWeekendDays) {
 		this.hotelName = hotelName;
 		this.weekDayRates = weekDayRates;
@@ -58,6 +61,7 @@ public class HotelReservationSystem {
 				+ ", weekEndDayRates=" + weekEndDayRates + ", ratings=" + ratings + ", rewardWeekDays=" + rewardWeekDays
 				+ ", rewardWeekendDays=" + rewardWeekendDays + "]";
 	}
+	
 	
 	
 }

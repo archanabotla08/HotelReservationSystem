@@ -12,9 +12,9 @@ public class HotelReservationSystemMethods {
 
 	private static ArrayList<HotelReservationSystem> hotelDetailsList = new ArrayList<>();
 
-	// UseCase: 1
-	public static void addHotel(String hotelName, int regularRates) {
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem(hotelName, regularRates);
+	
+	public static void addHotel(String hotelName, int weekDayRates,int weekEndDayRates) {
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem(hotelName, weekDayRates,weekEndDayRates);
 		hotelDetailsList.add(hotelReservationSystem);
 	}
 
@@ -22,7 +22,7 @@ public class HotelReservationSystemMethods {
 		return hotelDetailsList.size();
 	}
 
-	// UseCase: 2
+	
 	public static LocalDate convertStringToDate(String dateString) {
 		LocalDate date = null;
 		DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("ddMMMyyyy");
@@ -35,17 +35,17 @@ public class HotelReservationSystemMethods {
 		LocalDate dateInput_2 = convertStringToDate(input_2);
 		int bookingDays = 0;
 		bookingDays = (int) ChronoUnit.DAYS.between(dateInput_1, dateInput_2) + 1;
-		hotelDetailsList.add(new HotelReservationSystem("LakeWood", 110));
-		hotelDetailsList.add(new HotelReservationSystem("BridgeWood", 150));
-		hotelDetailsList.add(new HotelReservationSystem("RidgeWood", 220));
+		hotelDetailsList.add(new HotelReservationSystem("LakeWood", 110,90));
+		hotelDetailsList.add(new HotelReservationSystem("BridgeWood", 150,50));
+		hotelDetailsList.add(new HotelReservationSystem("RidgeWood", 220,150));
 		for (int i = 0; i < hotelDetailsList.size(); i++) {
-			int value = hotelDetailsList.get(i).getRegularRates() * (bookingDays);
-			hotelDetailsList.get(i).setRegularRates(value);
+			int value = hotelDetailsList.get(i).getWeekDayRates()* (bookingDays);
+			hotelDetailsList.get(i).setWeekDayRates(value);
 		}
-		String hotelName = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getRegularRates)).get()
+		String hotelName = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getWeekDayRates)).get()
 				.getHotelName();
-		int cheapestRate = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getRegularRates)).get()
-				.getRegularRates();
+		int cheapestRate = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getWeekDayRates)).get()
+				.getWeekDayRates();
 
 		return hotelName + " " + cheapestRate;
 	}

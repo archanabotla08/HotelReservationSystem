@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class HotelReservationSystemMethods {
 
@@ -95,7 +96,7 @@ public class HotelReservationSystemMethods {
 		return hotelRating.getKey() + ", Rating: " + hotelRating.getValue() + " and Total Rates: $" + cheapestRate;
 	}
 
-	public static String getCheapestBestRatedForRegularCustomer(String input_1, String input_2) {
+	public static String getCheapestBestRatedForRewardCustomer(String input_1, String input_2,boolean reward) {
 		LocalDate dateInput_1 = convertStringToDate(input_1);
 		LocalDate dateInput_2 = convertStringToDate(input_2);
 		DayOfWeek dayOfWeek_1 = getDays(dateInput_1);
@@ -128,15 +129,37 @@ public class HotelReservationSystemMethods {
 				bestRatedHotelForCustomers = hotelReservationSystem;
 			}
 		}
+		int higestRatings = hotelDetailsList.stream()
+								.max(Comparator.comparing(HotelReservationSystem::getRatings)).get().getRatings();
 		int cheapestRate = hotelDetailsList.stream()
 				.min(Comparator.comparing(HotelReservationSystem::getRewardWeekDays)).get().getRewardWeekDays();
 
-		return bestRatedHotelForCustomers.getHotelName() + ", Ratings: " + bestRatedHotelForCustomers.getRatings()
+		return bestRatedHotelForCustomers.getHotelName() + ", Ratings: " + higestRatings
 				+ " and Total Rate: $ " + cheapestRate;
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CusotmExceptionForInvalidEnteries {
+		HotelReservationSystemMethods hotelReservationSystemMethods = new HotelReservationSystemMethods();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter start Date : ");
+		String input_1 = sc.nextLine();
+		System.out.println("Enter end Date : ");
+		String input_2 = sc.nextLine();
+		System.out.println("Are Reward Customers : true/false");
+		boolean reward = sc.nextBoolean();
+		System.out.println(
+				"Enter choice \n1.FindCheapestHotelForRewardee \n3.Exit ");
+		int entry = sc.nextInt();
+			switch (entry) {
+			case 1:
+				hotelReservationSystemMethods.getCheapestBestRatedForRewardCustomer(input_1, input_2, reward);
+				break;
+			default:
+				throw new CusotmExceptionForInvalidEnteries("Enteries are invalid");
+			}
 	}
+
+	
 
 }

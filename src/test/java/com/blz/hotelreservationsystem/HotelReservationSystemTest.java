@@ -20,5 +20,6 @@ public class HotelReservationSystemTest {
 		assertEquals("RidgeWood, Ratings: 5 and Total Rate: $ 140",result);
 	}
 	
+
 	
 }

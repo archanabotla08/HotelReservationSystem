@@ -53,27 +53,25 @@ public class HotelReservationSystemMethods {
 		hotelDetailsList.add(new HotelReservationSystem("RidgeWood", 220, 150, 5));
 		int rent = 0;
 		for (int i = 0; i < hotelDetailsList.size(); i++) {
+			rent = 0;
 			if (strDays.contains(dayOfWeek_1) || strDays.contains(dayOfWeek_2)) {
 				rent = rent + hotelDetailsList.get(i).getWeekEndDayRates();
-				System.out.println(rent);
 				hotelDetailsList.get(i).setWeekEndDayRates(rent);
 
 			} else {
 				rent = rent + hotelDetailsList.get(i).getWeekDayRates();
-				System.out.println(rent);
 				hotelDetailsList.get(i).setWeekDayRates(rent);
-			}
-
+			}			
 		}
 		for (int i = 0; i < hotelDetailsList.size(); i++) {
 			int temp = hotelDetailsList.get(i).getWeekDayRates() + hotelDetailsList.get(i).getWeekEndDayRates();
 			hotelDetailsList.get(i).setWeekDayRates(temp);
 
 		}
-		cheapestRate = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getWeekDayRates))
+		cheapestRate = hotelDetailsList.stream().max(Comparator.comparing(HotelReservationSystem::getWeekDayRates))
 				.get().getWeekDayRates();
-
-		String hotelName = hotelDetailsList.stream().min(Comparator.comparing(HotelReservationSystem::getWeekDayRates)).get()
+		
+		String hotelName = hotelDetailsList.stream().max(Comparator.comparing(HotelReservationSystem::getWeekDayRates)).get()
 				.getHotelName();
 		
 		for (HotelReservationSystem hotel : hotelDetailsList) {
@@ -89,8 +87,7 @@ public class HotelReservationSystemMethods {
 		Map.Entry<String, Integer> hotelRating = null;
 		for (Map.Entry<String, Integer> entry : hotelMap.entrySet()) {
 			if (hotelRating == null || entry.getValue().compareTo(hotelRating.getValue()) > 0) {
-				hotelRating = entry;
-				
+				hotelRating = entry;				
 			}
 		}
 		return hotelRating.getKey() + ", Rating: " + hotelRating.getValue() + " and Total Rates: $" + cheapestRate;

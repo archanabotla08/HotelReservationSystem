@@ -6,10 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class HotelReservationSystemMethods {
 
@@ -140,7 +142,17 @@ public class HotelReservationSystemMethods {
 				+ " and Total Rate: $ " + cheapestRate;
 
 	}
-
+	
+	public static String getCheapestBestRatedForRegularCustomer(String input_1, String input_2,boolean reward) {
+		getCheapestHotel(input_1,input_2);
+		Map.Entry<String, Integer> hotelRating = null;
+		HotelReservationSystem bestHotelRating = ((Collection<HotelReservationSystem>) hotelRating).stream()
+				.max(Comparator.comparing(HotelReservationSystem::getRatings)).get();
+		String hotelName = bestHotelRating.getHotelName();
+		
+		return hotelName + ", Ratings: " + bestHotelRating + " and Total Rate: $ " + cheapestRate;
+		
+	}
 
 	public static void main(String[] args) throws CusotmExceptionForInvalidEnteries {
 		HotelReservationSystemMethods hotelReservationSystemMethods = new HotelReservationSystemMethods();
@@ -157,6 +169,9 @@ public class HotelReservationSystemMethods {
 			switch (entry) {
 			case 1:
 				hotelReservationSystemMethods.getCheapestBestRatedForRewardCustomer(input_1, input_2, reward);
+				break;
+			case 2:
+				hotelReservationSystemMethods.getCheapestBestRatedForRegularCustomer(input_1, input_2, reward);
 				break;
 			default:
 				throw new CusotmExceptionForInvalidEnteries("Enteries are invalid");
